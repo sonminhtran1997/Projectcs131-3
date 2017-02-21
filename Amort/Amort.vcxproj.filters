@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainAmortization.c">
+    <ClCompile Include="..\Projectcs131-3\Amort.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\Debug\Amort.lib">
-      <Filter>Source Files</Filter>
-    </Library>
+    <ClInclude Include="..\Projectcs131-3\Amort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
