@@ -64,15 +64,7 @@ int main(void) {
 	int month = 0;
 	double monthlyRate = 0.0;
 	double apr = 0.0;
-	printf("Amortization!");
-	printf("Amortization Program written by Son Tran");
-	printf("Please select a Menu Option\n\n");
-	printf("\t1. Calculate (P)ayment Size\n");
-	printf("\t2. Calculate (L)oan Size\n");
-	printf("\t3. Calculate (N)umber of Payments\n");
-	printf("\t4. Calculate (I)nterest (APR)\n");
-	printf("\t5. (Q)uit\n\n");
-	printf("Enter a menu option: ");
+	printMenu();
 	do
 	{
 		switch (getche())
@@ -82,7 +74,7 @@ int main(void) {
 		case 'p':
 			printf("\nEnter the interest rate (APR) you will be paying"
 				"(nearest 1/8 points, >=0): ");
-
+			safeReadDouble(&apr, "Please enter a non-negative number");
 			break;
 		case '2':
 		case 'l':
@@ -104,6 +96,8 @@ int main(void) {
 		case 'q':
 			return EXIT_SUCCESS;
 		default:
+			system("cls");
+			printMenu();
 			again = TRUE;
 			break;
 		}

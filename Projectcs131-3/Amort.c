@@ -33,7 +33,7 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 
 void safeReadDouble(double * number_ptr, const char * prompt)
 {
-	while ((scanf("%lf", number_ptr)) != ONE && *number_ptr < 0)
+	while ((scanf("%lf", number_ptr)) != ONE || *number_ptr < 0)
 	{
 		puts(prompt);
 		cleanBuffer();
@@ -42,7 +42,7 @@ void safeReadDouble(double * number_ptr, const char * prompt)
 }
 void safeReadInt(int * number_ptr, const char * prompt)
 {
-	while ((scanf("%d", number_ptr)) != ONE && *number_ptr < 0)
+	while ((scanf("%d", number_ptr)) != ONE || *number_ptr < 0)
 	{
 		puts(prompt);
 		cleanBuffer();
@@ -52,4 +52,15 @@ void safeReadInt(int * number_ptr, const char * prompt)
 void cleanBuffer()
 {
 	while (getchar() != '\n');
+}
+void printMenu() {
+	printf("Amortization!\n");
+	printf("Amortization Program written by Son Tran");
+	printf("Please select a Menu Option\n\n");
+	printf("\t1. Calculate (P)ayment Size\n");
+	printf("\t2. Calculate (L)oan Size\n");
+	printf("\t3. Calculate (N)umber of Payments\n");
+	printf("\t4. Calculate (I)nterest (APR)\n");
+	printf("\t5. (Q)uit\n\n");
+	printf("Enter a menu option: ");
 }
