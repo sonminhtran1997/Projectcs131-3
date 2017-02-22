@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define ONE 1
+#define ZERO 0
 #pragma once
 
 double getPaymentAmount(int months, double principal, double monthlyRate)
@@ -29,6 +30,27 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 	numerator = log(totalPayment) - log(totalPayment - (principal*monthlyRate));
 	denominator = log(1 + monthlyRate);
 	return numerator / denominator;
+}
+
+double readApr() {
+	double apr = 0.0;
+	do
+	{
+		safeReadDouble(&apr, "please enter a non-negative number");
+	} while (apr = ZERO);
+	return apr;
+}
+
+double readPrincipal() {
+
+}
+
+int readMonth() {
+
+}
+
+double readPayment() {
+
 }
 
 void safeReadDouble(double * number_ptr, const char * prompt)
