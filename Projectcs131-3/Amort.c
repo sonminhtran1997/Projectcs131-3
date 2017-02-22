@@ -55,7 +55,7 @@ void cleanBuffer()
 }
 void printMenu() {
 	printf("Amortization!\n");
-	printf("Amortization Program written by Son Tran");
+	printf("Amortization Program written by Son Tran. ");
 	printf("Please select a Menu Option\n\n");
 	printf("\t1. Calculate (P)ayment Size\n");
 	printf("\t2. Calculate (L)oan Size\n");
