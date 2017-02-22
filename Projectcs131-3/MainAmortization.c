@@ -124,7 +124,19 @@ int main(void) {
 		case '3':
 		case 'N':
 		case 'n':
-			
+			printf("\nEnter the interest rate (APR) you will be paying"
+				"(nearest 1/8 points, >=0): ");
+			safeReadDouble(&apr, "Please enter a non-negative number");
+			monthlyRate = apr / 1200;
+			printf("Interest: %.3lf%c\n", apr, '%');
+			printf("Enter the amount of money to be borrowed (amount > 0): $");
+			safeReadDouble(&principal, "Please enter a non-negative number");
+			printf("Principal: $%.2lf\n", principal);
+			printf("Enter the amount of the monthly payment (amount > 0): $");
+			safeReadDouble(&totalPayment, "Please enter a non-negative number");
+			printf("Monthly Payment: $%.3lf\n", totalPayment);
+			month = getNumberOfMonths(principal, totalPayment, monthlyRate);
+			printf("Number of months to pay the loan: %d", month);
 			break;
 		case '4':
 		case 'I':
