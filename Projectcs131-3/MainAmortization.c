@@ -57,6 +57,7 @@
 //					Commit github on 02/04/2017: 
 //					Commit github on 02/08/2017: 
 //----------------------------------------------------------------------------
+double readApr();
 int main(void) {
 	short again = FALSE;
 	double totalPayment = 0.0;
@@ -72,11 +73,8 @@ int main(void) {
 		case '1':
 		case 'P':
 		case 'p':
-			printf("\nEnter the interest rate (APR) you will be paying"
-				"(nearest 1/8 points, >=0): ");
-			safeReadDouble(&apr, "Please enter a non-negative number");
+			apr = readApr();
 			monthlyRate = apr / 1200;
-			printf("Interest: %.3lf%c\n", apr,'%');
 			printf("Enter the amount of money to be borrowed (amount > 0): $");
 			safeReadDouble(&principal, "Please enter a non-negative number");
 			printf("Principal: $%.2lf\n", principal);
@@ -100,8 +98,7 @@ int main(void) {
 		case 'L':
 			printf("\nEnter the interest rate (APR) you will be paying"
 				"(nearest 1/8 points, >=0): ");
-			safeReadDouble(&apr, "Please enter a non-negative number");
-			monthlyRate = apr / 1200;
+			apr = readApr();
 			printf("Interest: %.3lf%c\n", apr, '%');
 			printf("Enter the amount of the monthly payment (amount > 0): $");
 			safeReadDouble(&totalPayment, "Please enter a non-negative number");

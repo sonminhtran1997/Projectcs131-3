@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #define ONE 1
 #define ZERO 0
+#define TRUE 1
+#define FALSE 0
 #pragma once
 
 double getPaymentAmount(int months, double principal, double monthlyRate)
@@ -33,29 +35,41 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 }
 
 double readApr() {
-	double apr = 0.0;
+	double interestRate = 0.0;
+	printf("\nEnter the interest rate (APR) you will be paying"
+		"(nearest 1/8 points, >=0): ");
+	int condition = FALSE;
 	do
 	{
-		safeReadDouble(&apr, "please enter a non-negative number");
-	} while (apr = ZERO);
-	return apr;
+		safeReadDouble(&interestRate, "Please enter a non-negative number");
+		if (interestRate <= 0)
+		{
+			printf("please enter a positive value for Annual Payment Rate: ");
+			condition = TRUE;
+		}
+		else {
+			printf("Interest: %.3lf%c\n", interestRate, '%');
+
+		}
+	} while (condition == TRUE);
+	return interestRate;
 }
 
-double readPrincipal() {
+void readPrincipal() {
 
 }
 
-int readMonth() {
+void readMonth() {
 
 }
 
-double readPayment() {
+void readPayment() {
 
 }
 
 void safeReadDouble(double * number_ptr, const char * prompt)
 {
-	while ((scanf("%lf", number_ptr)) != ONE || *number_ptr < 0)
+	while ((scanf("%lf", number_ptr)) != ONE)
 	{
 		puts(prompt);
 		cleanBuffer();
@@ -64,7 +78,7 @@ void safeReadDouble(double * number_ptr, const char * prompt)
 }
 void safeReadInt(int * number_ptr, const char * prompt)
 {
-	while ((scanf("%d", number_ptr)) != ONE || *number_ptr < 0)
+	while ((scanf("%d", number_ptr)) != ONE)
 	{
 		puts(prompt);
 		cleanBuffer();
