@@ -58,6 +58,8 @@
 //					Commit github on 02/08/2017: 
 //----------------------------------------------------------------------------
 double readApr();
+double readPrincipal();
+int readMonth();
 int main(void) {
 	short again = FALSE;
 	double totalPayment = 0.0;
@@ -76,7 +78,7 @@ int main(void) {
 			apr = readApr();
 			monthlyRate = apr / 1200;
 			principal = readPrincipal();
-			month = readMonth(); 
+			month = readMonth();
 			totalPayment= getPaymentAmount(month, principal, monthlyRate);
 			printf("Payment: $%.2lf per month", totalPayment);
 			break;
