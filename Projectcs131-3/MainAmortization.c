@@ -75,21 +75,8 @@ int main(void) {
 		case 'p':
 			apr = readApr();
 			monthlyRate = apr / 1200;
-			printf("Enter the amount of money to be borrowed (amount > 0): $");
-			safeReadDouble(&principal, "Please enter a non-negative number");
-			printf("Principal: $%.2lf\n", principal);
-			printf("Enter the number of months you will be making"
-				"payments (0 < months <= 360): ");
-			do
-			{
-				safeReadInt(&month, "Please enter a non - negative" 
-					"number from 0 to 360:");
-				if (month > 360)
-				{
-					puts("Please enter a non - negative number from 0 to 360: ");
-				}
-			} while (month > 360);
-			printf("Number of Months to pay: %d\n", month);
+			principal = readPrincipal();
+			month = readMonth(); 
 			totalPayment= getPaymentAmount(month, principal, monthlyRate);
 			printf("Payment: $%.2lf per month", totalPayment);
 			break;

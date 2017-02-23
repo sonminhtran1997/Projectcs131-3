@@ -18,5 +18,13 @@
     <ClCompile Include="MainAmortization.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Amort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Amort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
