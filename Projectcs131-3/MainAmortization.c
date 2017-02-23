@@ -87,6 +87,7 @@ int main(void) {
 		case 'l':
 		case 'L':
 			apr = readApr();
+			monthlyRate = apr / 1200;
 			totalPayment = readPayment();
 			month = readMonth();
 			principal = getLoanAmount(month, totalPayment, monthlyRate);

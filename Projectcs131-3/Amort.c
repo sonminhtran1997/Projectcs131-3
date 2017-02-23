@@ -31,6 +31,7 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 	double denominator = 0.0;
 	numerator = log(totalPayment) - log(totalPayment - (principal*monthlyRate));
 	denominator = log(1 + monthlyRate);
+	double result = numerator / denominator;
 	return numerator / denominator;
 }
 
@@ -78,7 +79,7 @@ double readPrincipal() {
 int readMonth() {
 	int numMonth = 0;
 	int condition = FALSE;
-	printf("Enter the number of months you will be making"
+	printf("Enter the number of months you will be making "
 		"payments (0 < months <= 360): ");
 	do
 	{
@@ -110,7 +111,7 @@ double readPayment() {
 			condition = TRUE;
 		}
 		else {
-			printf("Payment: $%.2lf per month", payment);
+			printf("Payment: $%.2lf per month\n", payment);
 			condition = FALSE;
 		}
 	} while (condition == TRUE);
