@@ -6,15 +6,17 @@
 #define TRUE 1
 #define FALSE 0
 #define EIGHT 8
+#define HUNDRED 100
 #pragma once
 double roundToOneEighth(double number);
+double roundToNextCent(double number);
 double getPaymentAmount(int months, double principal, double monthlyRate)
 {
 	double numerator = 0.0;
 	double denominator = 0.0;
 	numerator = pow((ONE + monthlyRate), months) * principal * monthlyRate;
 	denominator = pow((ONE + monthlyRate), months) - ONE;
-	return numerator / denominator;
+	return roundToNextCent(numerator / denominator);
 }
 
 double getLoanAmount(int months, double totalPayment, double monthlyRate)
@@ -156,7 +158,9 @@ void printMenu() {
 	printf("\t5. (Q)uit\n\n");
 	printf("Enter a menu option: ");
 }
-
+double roundToNextCent(double number) {
+	return ceil(number * HUNDRED) / HUNDRED;
+}
 double roundToOneEighth(double number) {
 	double out = 0.0;
 	double roundUp = 0.0;
