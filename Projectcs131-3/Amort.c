@@ -5,8 +5,9 @@
 #define ZERO 0
 #define TRUE 1
 #define FALSE 0
+#define EIGHT 8
 #pragma once
-
+double roundToOneEighth(double number);
 double getPaymentAmount(int months, double principal, double monthlyRate)
 {
 	double numerator = 0.0;
@@ -32,7 +33,7 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 	numerator = log(totalPayment) - log(totalPayment - (principal*monthlyRate));
 	denominator = log(1 + monthlyRate);
 	double result = numerator / denominator;
-	return numerator / denominator;
+	return ceil(numerator / denominator);
 }
 
 double readApr() {
@@ -49,6 +50,7 @@ double readApr() {
 			condition = TRUE;
 		}
 		else {
+			interestRate = roundToOneEighth(interestRate);
 			printf("Interest: %.3lf%c\n", interestRate, '%');
 			condition = FALSE;
 		}
@@ -127,6 +129,7 @@ void safeReadDouble(double * number_ptr, const char * prompt)
 	}
 	cleanBuffer();
 }
+
 void safeReadInt(int * number_ptr, const char * prompt)
 {
 	while ((scanf("%d", number_ptr)) != ONE)
@@ -136,10 +139,12 @@ void safeReadInt(int * number_ptr, const char * prompt)
 	}
 	cleanBuffer();
 }
+
 void cleanBuffer()
 {
 	while (getchar() != '\n');
 }
+
 void printMenu() {
 	printf("Amortization!\n");
 	printf("Amortization Program written by Son Tran. ");
@@ -150,4 +155,16 @@ void printMenu() {
 	printf("\t4. Calculate (I)nterest (APR)\n");
 	printf("\t5. (Q)uit\n\n");
 	printf("Enter a menu option: ");
+}
+
+double roundToOneEighth(double number) {
+	double out = 0.0;
+	double roundUp = 0.0;
+	double roundDown = 0.0;
+	roundUp = ceil(number * EIGHT) / EIGHT;
+	roundDown = floor(number * EIGHT) / EIGHT;
+	if (abs(roundUp - number) <= abs(roundDown - number))
+		return roundUp;
+	else
+		return roundDown;
 }

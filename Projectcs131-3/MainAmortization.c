@@ -81,7 +81,7 @@ int main(void) {
 			principal = readPrincipal();
 			month = readMonth();
 			totalPayment= getPaymentAmount(month, principal, monthlyRate);
-			printf("Payment: $%.2lf per month", totalPayment);
+			printf("Payment: $%.2lf per month\n", totalPayment);
 			break;
 		case '2':
 		case 'l':
@@ -91,7 +91,7 @@ int main(void) {
 			totalPayment = readPayment();
 			month = readMonth();
 			principal = getLoanAmount(month, totalPayment, monthlyRate);
-			printf("Loan Amount: $%.2lf", principal);
+			printf("Loan Amount: $%.2lf\n", principal);
 			break;
 		case '3':
 		case 'N':
@@ -101,7 +101,7 @@ int main(void) {
 			principal = readPrincipal();
 			totalPayment = readPayment();
 			month = getNumberOfMonths(principal, totalPayment, monthlyRate);
-			printf("Number of months to pay the loan: %d", month);
+			printf("Number of months to pay the loan: %d\n", month);
 			break;
 		case '4':
 		case 'I':
