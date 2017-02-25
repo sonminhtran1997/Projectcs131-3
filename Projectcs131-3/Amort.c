@@ -7,6 +7,10 @@
 #define FALSE 0
 #define EIGHT 8
 #define HUNDRED 100
+#define HALF 0.5
+#define VERYSMALL 0.001
+#define MANYTIMES 20
+#define YEARLY_INTEREST_RATE 1200
 #pragma once
 double roundToOneEighth(double number);
 double roundToNextCent(double number);
@@ -38,6 +42,47 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 	return ceil(numerator / denominator);
 }
 
+double iterativeFormula(double sizeOfLoan, double monthlyPayment,
+	double rate, double months)
+{
+	double answer = (monthlyPayment / sizeOfLoan) - ((rate * pow(1 + rate, months))
+		/ (pow(1 + rate, months) - 1));
+	return answer;
+}
+
+double getAppDer(double secondary, double primary, double distance)
+{
+	double answer = 0;
+	answer = (secondary - primary) / distance;
+	return answer;
+}
+
+double getInterestRate(double sizeOfLoan, double monthlyPayment, int months)
+{
+	double rateGuess = 0.0;
+	int counter = 0;
+	if (monthlyPayment * months <= sizeOfLoan)
+	{
+		return 0;
+	}
+	rateGuess = ((monthlyPayment * months) - sizeOfLoan) / (sizeOfLoan);
+	int keepGoing = TRUE;
+	while (keepGoing == TRUE)
+	{
+		rateGuess = rateGuess - (iterativeFormula(sizeOfLoan, monthlyPayment,
+			rateGuess, months) / (getAppDer(iterativeFormula(sizeOfLoan,
+				monthlyPayment, rateGuess + VERYSMALL, months), iterativeFormula
+				(sizeOfLoan, monthlyPayment, rateGuess, months), VERYSMALL)));
+		counter++;
+		if (counter == MANYTIMES)
+		{
+			keepGoing = FALSE;
+		}
+	}
+	rateGuess = rateGuess * YEARLY_INTEREST_RATE;
+	return rateGuess;
+}	
+
 double readApr() {
 	double interestRate = 0.0;
 	printf("\nEnter the interest rate (APR) you will be paying"
@@ -62,7 +107,7 @@ double readApr() {
 
 double readPrincipal() {
 	double loan = 0.0;
-	printf("Enter the amount of money to be borrowed (amount > 0): $");
+	printf("\nEnter the amount of money to be borrowed (amount > 0): $");
 	int condition = FALSE;
 	do
 	{
@@ -158,9 +203,11 @@ void printMenu() {
 	printf("\t5. (Q)uit\n\n");
 	printf("Enter a menu option: ");
 }
+
 double roundToNextCent(double number) {
 	return ceil(number * HUNDRED) / HUNDRED;
 }
+
 double roundToOneEighth(double number) {
 	double out = 0.0;
 	double roundUp = 0.0;
@@ -171,4 +218,8 @@ double roundToOneEighth(double number) {
 		return roundUp;
 	else
 		return roundDown;
+}
+
+double roundToNearestCent(double number) {
+	return floor(number * HUNDRED + HALF) / HUNDRED;
 }

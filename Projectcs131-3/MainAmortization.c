@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include "Amort.h"
+#include "MainAmortization.h"
 #define TRUE 1
 #define FALSE 0
 //----------------------------------------------------------------------------
@@ -61,6 +62,7 @@ double readApr();
 double readPrincipal();
 double readPayment();
 int readMonth();
+double getInterestRate(double sizeOfLoan, double monthlyPayment, int months);
 int main(void) {
 	short again = FALSE;
 	double totalPayment = 0.0;
@@ -68,6 +70,7 @@ int main(void) {
 	int month = 0;
 	double monthlyRate = 0.0;
 	double apr = 0.0;
+	int initialGuessMonth = 0;
 	printMenu();
 	do
 	{
@@ -106,7 +109,20 @@ int main(void) {
 		case '4':
 		case 'I':
 		case 'i':
-			printf("\nOK");
+			principal = readPrincipal();
+			totalPayment = readPayment();
+			initialGuessMonth = ceil(principal / totalPayment);
+			printf("Number of months must be at least %d\n", initialGuessMonth);
+			do
+			{
+				month = readMonth();
+				if (month < initialGuessMonth)
+				{
+					printf("The month you entered must be at least %d\n", initialGuessMonth);
+				}
+			} while (month < initialGuessMonth);
+			apr = getInterestRate(principal, totalPayment, month);
+			printf("Annual Percentage Rate: %.2lf%c", apr, '%');
 			break;
 		case '5':
 		case 'Q':
