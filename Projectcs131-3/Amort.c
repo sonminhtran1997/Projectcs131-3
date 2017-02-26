@@ -223,3 +223,39 @@ double roundToOneEighth(double number) {
 double roundToNearestCent(double number) {
 	return floor(number * HUNDRED + HALF) / HUNDRED;
 }
+
+void printTable(double principal, double payment, double monthlyRate, int month) {
+	char ch = ' ';
+	char filename[FILENAME_MAX] = "AmTable.txt";
+	int returnValue = EXIT_SUCCESS;
+	FILE * outFileHandle = NULL;
+	int i = 0;
+	printf("Do you wish to print an Amortization Table(Y/N)?");
+	ch = getche();
+	if (ch == 'N' || ch == 'n')
+	{
+		return returnValue;
+	}
+	else {
+		outFileHandle = fopen(filename, "w");
+		if (outFileHandle == NULL)
+		{
+			printf("Could not open file %s for output.\n"
+				"Press any key to Continue", filename);
+			returnValue = EXIT_FAILURE;
+		}
+		else {
+			fprintf(outFileHandle, "Amortization Table for $%.2lf Loan "
+				"at %.3lf%% interest for %d months\n", principal,
+				monthlyRate * 1200, month);
+			fprintf(outFileHandle, "\n");
+			fprintf(outFileHandle, "%s %22s %15s %15s\n",
+				"Payments", "Principal Paid", "Interest Paid",
+				"Loan Balance");
+			if (true)
+			{
+
+			}
+		}
+	}
+}
