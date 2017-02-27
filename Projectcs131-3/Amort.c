@@ -107,7 +107,7 @@ double readApr() {
 
 double readPrincipal() {
 	double loan = 0.0;
-	printf("\nEnter the amount of money to be borrowed (amount > 0): $");
+	printf("Enter the amount of money to be borrowed (amount > 0): $");
 	int condition = FALSE;
 	do
 	{
@@ -252,10 +252,7 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 			fprintf(outFileHandle, "%s %22s %15s %15s\n",
 				"Payments", "Principal Paid", "Interest Paid",
 				"Loan Balance");
-			if (true)
-			{
-
-			}
+			
 		}
 	}
 }

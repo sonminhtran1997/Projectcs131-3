@@ -58,11 +58,6 @@
 //					Commit github on 02/04/2017: 
 //					Commit github on 02/08/2017: 
 //----------------------------------------------------------------------------
-double readApr();
-double readPrincipal();
-double readPayment();
-int readMonth();
-double getInterestRate(double sizeOfLoan, double monthlyPayment, int months);
 int main(void) {
 	short again = FALSE;
 	double totalPayment = 0.0;

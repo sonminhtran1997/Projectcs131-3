@@ -14,4 +14,8 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 void safeReadDouble(double* number_ptr, const char * prompt);
 void safeReadInt(int* number_ptr, const char * prompt);
 void cleanBuffer();
+double readApr();
+double readPrincipal();
+double readPayment();
+int readMonth();
 #endif #pragma once
