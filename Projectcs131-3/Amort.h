@@ -11,6 +11,7 @@ double getPaymentAmount(int months, double principal, double monthlyRate);
 double getLoanAmount(int months, double totalPayment, double monthlyRate);
 //header for function get number of months
 int getNumberOfMonths(double principal, double totalPayment, double monthlyRate);
+double getInterestRate(double sizeOfLoan, double monthlyPayment, int months);
 void safeReadDouble(double* number_ptr, const char * prompt);
 void safeReadInt(int* number_ptr, const char * prompt);
 void cleanBuffer();

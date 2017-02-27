@@ -79,7 +79,7 @@ int main(void) {
 			principal = readPrincipal();
 			month = readMonth();
 			totalPayment= getPaymentAmount(month, principal, monthlyRate);
-			printf("Payment: $%.2lf per month\n", totalPayment);
+			printf("\nPayment: $%.2lf per month\n", totalPayment);
 			break;
 		case '2':
 		case 'l':
@@ -89,7 +89,7 @@ int main(void) {
 			totalPayment = readPayment();
 			month = readMonth();
 			principal = getLoanAmount(month, totalPayment, monthlyRate);
-			printf("Loan Amount: $%.2lf\n", principal);
+			printf("\nLoan Amount: $%.2lf\n", principal);
 			break;
 		case '3':
 		case 'N':
@@ -99,7 +99,7 @@ int main(void) {
 			principal = readPrincipal();
 			totalPayment = readPayment();
 			month = getNumberOfMonths(principal, totalPayment, monthlyRate);
-			printf("Number of months to pay the loan: %d\n", month);
+			printf("\nNumber of months to pay the loan: %d\n", month);
 			break;
 		case '4':
 		case 'I':
@@ -107,17 +107,17 @@ int main(void) {
 			principal = readPrincipal();
 			totalPayment = readPayment();
 			initialGuessMonth = ceil(principal / totalPayment);
-			printf("Number of months must be at least %d\n", initialGuessMonth);
+			printf("\nNumber of months must be at least %d", initialGuessMonth);
 			do
 			{
 				month = readMonth();
 				if (month < initialGuessMonth)
 				{
-					printf("The month you entered must be at least %d\n", initialGuessMonth);
+					printf("\nThe month you entered must be at least %d", initialGuessMonth);
 				}
 			} while (month < initialGuessMonth);
 			apr = getInterestRate(principal, totalPayment, month);
-			printf("Annual Percentage Rate: %.2lf%c", apr, '%');
+			printf("\nAnnual Percentage Rate: %.2lf%c", apr, '%');
 			break;
 		case '5':
 		case 'Q':

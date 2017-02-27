@@ -98,7 +98,7 @@ double readApr() {
 		}
 		else {
 			interestRate = roundToOneEighth(interestRate);
-			printf("Interest: %.3lf%c\n", interestRate, '%');
+			printf("Interest: %.3lf%c", interestRate, '%');
 			condition = FALSE;
 		}
 	} while (condition == TRUE);
@@ -107,18 +107,18 @@ double readApr() {
 
 double readPrincipal() {
 	double loan = 0.0;
-	printf("Enter the amount of money to be borrowed (amount > 0): $");
+	printf("\nEnter the amount of money to be borrowed (amount > 0): $");
 	int condition = FALSE;
 	do
 	{
-		safeReadDouble(&loan, "Please enter a non-negative number");
+		safeReadDouble(&loan, "\nPlease enter a non-negative number");
 		if (loan <= 0)
 		{
-			printf("The amount of Loan needs to be bigger than 0");
+			printf("\nThe amount of Loan needs to be bigger than 0");
 			condition = TRUE;
 		}
 		else {
-			printf("Principal: $%.2lf\n", loan);
+			printf("Principal: $%.2lf", loan);
 			condition = FALSE;
 		}
 	} while (condition == TRUE);
@@ -128,19 +128,19 @@ double readPrincipal() {
 int readMonth() {
 	int numMonth = 0;
 	int condition = FALSE;
-	printf("Enter the number of months you will be making "
+	printf("\nEnter the number of months you will be making "
 		"payments (0 < months <= 360): ");
 	do
 	{
-		safeReadInt(&numMonth, "Please enter a non - negative"
+		safeReadInt(&numMonth, "\nPlease enter a non - negative"
 			"number from 0 to 360:");
 		if (numMonth <= 0 || numMonth > 360)
 		{
-			puts("You have to input positive number for number of months");
+			puts("\nYou have to input positive number for number of months");
 			condition = TRUE;
 		}
 		else {
-			printf("Number of Months to pay: %d\n", numMonth);
+			printf("Number of Months to pay: %d", numMonth);
 			condition = FALSE;
 		}
 	} while (condition == TRUE);
@@ -150,17 +150,17 @@ int readMonth() {
 double readPayment() {
 	double payment = 0.0;
 	int condition = FALSE;
-	printf("Enter the amount of the monthly payment (amount > 0): $");
+	printf("\nEnter the amount of the monthly payment (amount > 0): $");
 	do
 	{
-		safeReadDouble(&payment, "Please enter a non-negative number");
+		safeReadDouble(&payment, "\nPlease enter a non-negative number");
 		if (payment <= 0)
 		{
-			puts("Please enter number bigger than 0 for your monthly payment");
+			puts("\nPlease enter number bigger than 0 for your monthly payment");
 			condition = TRUE;
 		}
 		else {
-			printf("Payment: $%.2lf per month\n", payment);
+			printf("Payment: $%.2lf per month", payment);
 			condition = FALSE;
 		}
 	} while (condition == TRUE);
