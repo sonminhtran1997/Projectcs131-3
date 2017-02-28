@@ -52,13 +52,13 @@ int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 	double denominator = 0.0;
 	if (monthlyRate == ZERO)
 	{
-		return ceil(principal / totalPayment);
+		return (int)ceil(principal / totalPayment);
 	}
 	else
 	{
 		numerator = log(totalPayment) - log(totalPayment - (principal*monthlyRate));
 		denominator = log(1 + monthlyRate);
-		return ceil(numerator / denominator);
+		return (int)ceil(numerator / denominator);
 	}
 }
 
@@ -255,11 +255,11 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 	int countMonth = 1;
 	FILE * outFileHandle = NULL;
 	int i = 0;
-	printf("Do you wish to print an Amortization Table(Y/N)?");
+	printf("\nDo you wish to print an Amortization Table(Y/N)? Y\b");
 	ch = getche();
 	if (ch == 'N' || ch == 'n')
 	{
-		return returnValue;
+		return;
 	}
 	else {
 		outFileHandle = fopen(filename, "w");
@@ -329,5 +329,6 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 			}
 		}
 		fclose(outFileHandle);
+		system("AmTable.txt");
 	}
 }

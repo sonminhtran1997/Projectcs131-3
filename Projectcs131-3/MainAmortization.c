@@ -10,6 +10,7 @@
 #include "MainAmortization.h"
 #define TRUE 1
 #define FALSE 0
+#define MONTHPERCENT 1200
 //----------------------------------------------------------------------------
 // Function:		main(void)		
 //
@@ -59,49 +60,51 @@
 //					Commit github on 02/08/2017: 
 //----------------------------------------------------------------------------
 int main(void) {
-	short again = FALSE;
+	short again = TRUE;
 	double totalPayment = 0.0;
 	double principal = 0.0;
 	int month = 0;
 	double monthlyRate = 0.0;
 	double apr = 0.0;
 	int initialGuessMonth = 0;
-	printMenu();
+	
 	do
 	{
+		system("cls");
+		printMenu();
 		switch (getche())
 		{
 		case '1':
 		case 'P':
 		case 'p':
 			apr = readApr();
-			monthlyRate = apr / 1200;
+			monthlyRate = apr / MONTHPERCENT;
 			principal = readPrincipal();
 			month = readMonth();
 			totalPayment= getPaymentAmount(month, principal, monthlyRate);
-			printf("\nPayment: $%.2lf per month\n", totalPayment);
+			printf("\nPayment: $%.2lf per month", totalPayment);
 			printTable(principal, totalPayment, monthlyRate, month);
 			break;
 		case '2':
 		case 'l':
 		case 'L':
 			apr = readApr();
-			monthlyRate = apr / 1200;
+			monthlyRate = apr / MONTHPERCENT;
 			totalPayment = readPayment();
 			month = readMonth();
 			principal = getLoanAmount(month, totalPayment, monthlyRate);
-			printf("\nLoan Amount: $%.2lf\n", principal);
+			printf("\nLoan Amount: $%.2lf", principal);
 			printTable(principal, totalPayment, monthlyRate, month);
 			break;
 		case '3':
 		case 'N':
 		case 'n':
 			apr = readApr();
-			monthlyRate = apr / 1200;
+			monthlyRate = apr / MONTHPERCENT;
 			principal = readPrincipal();
 			totalPayment = readPayment();
 			month = getNumberOfMonths(principal, totalPayment, monthlyRate);
-			printf("\nNumber of months to pay the loan: %d\n", month);
+			printf("\nNumber of months to pay the loan: %d", month);
 			printTable(principal, totalPayment, monthlyRate, month);
 			break;
 		case '4':
@@ -120,7 +123,7 @@ int main(void) {
 				}
 			} while (month < initialGuessMonth);
 			apr = getInterestRate(principal, totalPayment, month);
-			monthlyRate = apr / 1200;
+			monthlyRate = apr / MONTHPERCENT;
 			printf("\nAnnual Percentage Rate: %.3lf%c", apr, '%');
 			printTable(principal, totalPayment, monthlyRate, month);
 			break;
