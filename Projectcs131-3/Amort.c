@@ -18,28 +18,48 @@ double getPaymentAmount(int months, double principal, double monthlyRate)
 {
 	double numerator = 0.0;
 	double denominator = 0.0;
-	numerator = pow((ONE + monthlyRate), months) * principal * monthlyRate;
-	denominator = pow((ONE + monthlyRate), months) - ONE;
-	return roundToNextCent(numerator / denominator);
+	if (monthlyRate == ZERO)
+	{
+		return principal / months;
+	}
+	else
+	{
+		numerator = pow((ONE + monthlyRate), months) * principal * monthlyRate;
+		denominator = pow((ONE + monthlyRate), months) - ONE;
+		return roundToNextCent(numerator / denominator);
+	}
 }
 
 double getLoanAmount(int months, double totalPayment, double monthlyRate)
 {
 	double numerator = 0.0;
 	double denominator = 0.0;
-	numerator = (pow((ONE + monthlyRate), months) - ONE) * totalPayment;
-	denominator = pow((ONE + monthlyRate), months) * monthlyRate;
-	return numerator / denominator;
+	if (monthlyRate == ZERO)
+	{
+		return totalPayment * months;
+	}
+	else
+	{
+		numerator = (pow((ONE + monthlyRate), months) - ONE) * totalPayment;
+		denominator = pow((ONE + monthlyRate), months) * monthlyRate;
+		return numerator / denominator;
+	}
 }
 
 int getNumberOfMonths(double principal, double totalPayment, double monthlyRate)
 {
 	double numerator = 0.0;
 	double denominator = 0.0;
-	numerator = log(totalPayment) - log(totalPayment - (principal*monthlyRate));
-	denominator = log(1 + monthlyRate);
-	double result = numerator / denominator;
-	return ceil(numerator / denominator);
+	if (monthlyRate == ZERO)
+	{
+		return ceil(principal / totalPayment);
+	}
+	else
+	{
+		numerator = log(totalPayment) - log(totalPayment - (principal*monthlyRate));
+		denominator = log(1 + monthlyRate);
+		return ceil(numerator / denominator);
+	}
 }
 
 double iterativeFormula(double sizeOfLoan, double monthlyPayment,
@@ -80,7 +100,7 @@ double getInterestRate(double sizeOfLoan, double monthlyPayment, int months)
 		}
 	}
 	rateGuess = rateGuess * YEARLY_INTEREST_RATE;
-	return rateGuess;
+	return roundToOneEighth(rateGuess);
 }	
 
 double readApr() {
@@ -214,7 +234,7 @@ double roundToOneEighth(double number) {
 	double roundDown = 0.0;
 	roundUp = ceil(number * EIGHT) / EIGHT;
 	roundDown = floor(number * EIGHT) / EIGHT;
-	if (abs(roundUp - number) <= abs(roundDown - number))
+	if (fabs(roundUp - number) <= fabs(roundDown - number))
 		return roundUp;
 	else
 		return roundDown;
@@ -228,6 +248,11 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 	char ch = ' ';
 	char filename[FILENAME_MAX] = "AmTable.txt";
 	int returnValue = EXIT_SUCCESS;
+	double interestPaid = 0.0;
+	double principalPaid = 0.0;
+	double loanBalance = 0.0;
+	double tabPayment = 0.0;
+	int countMonth = 1;
 	FILE * outFileHandle = NULL;
 	int i = 0;
 	printf("Do you wish to print an Amortization Table(Y/N)?");
@@ -252,7 +277,35 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 			fprintf(outFileHandle, "%s %22s %15s %15s\n",
 				"Payments", "Principal Paid", "Interest Paid",
 				"Loan Balance");
-			
+			if (monthlyRate == 0)
+			{
+				tabPayment = payment;
+				interestPaid = 0;
+				principalPaid = payment;
+				for (i = 0; i < month; i++)
+				{
+					loanBalance = principal - (i+1) * principalPaid;
+					fprintf(outFileHandle, "%-5d ( %8.2lf) ",
+						countMonth, tabPayment);
+					fprintf(outFileHandle, "$ %13.2lf ",
+						principalPaid);
+					fprintf(outFileHandle, "$ %13.2lf ",
+						interestPaid);
+					fprintf(outFileHandle, "$ %12.2lf \n",
+						loanBalance);
+					countMonth++;
+				}
+			}
+			else
+			{
+				for (i = 0; i < month; i++)
+				{
+					if (i <)
+					{
+
+					}
+				}
+			}
 		}
 	}
 }

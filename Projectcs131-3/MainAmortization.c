@@ -80,6 +80,7 @@ int main(void) {
 			month = readMonth();
 			totalPayment= getPaymentAmount(month, principal, monthlyRate);
 			printf("\nPayment: $%.2lf per month\n", totalPayment);
+			printTable(principal, totalPayment, monthlyRate, month);
 			break;
 		case '2':
 		case 'l':
@@ -117,7 +118,7 @@ int main(void) {
 				}
 			} while (month < initialGuessMonth);
 			apr = getInterestRate(principal, totalPayment, month);
-			printf("\nAnnual Percentage Rate: %.2lf%c", apr, '%');
+			printf("\nAnnual Percentage Rate: %.3lf%c", apr, '%');
 			break;
 		case '5':
 		case 'Q':
