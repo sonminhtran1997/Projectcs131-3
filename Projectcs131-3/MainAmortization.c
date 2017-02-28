@@ -120,6 +120,7 @@ int main(void) {
 				}
 			} while (month < initialGuessMonth);
 			apr = getInterestRate(principal, totalPayment, month);
+			monthlyRate = apr / 1200;
 			printf("\nAnnual Percentage Rate: %.3lf%c", apr, '%');
 			printTable(principal, totalPayment, monthlyRate, month);
 			break;
