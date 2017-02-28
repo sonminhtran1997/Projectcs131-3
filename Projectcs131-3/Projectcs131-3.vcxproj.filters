@@ -24,9 +24,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\x64\Debug\Amort.lib">
-      <Filter>Source Files</Filter>
-    </Library>
-  </ItemGroup>
 </Project>

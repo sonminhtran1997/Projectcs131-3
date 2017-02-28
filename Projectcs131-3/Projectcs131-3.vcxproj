@@ -152,9 +152,6 @@
   <ItemGroup>
     <ClInclude Include="MainAmortization.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\x64\Debug\Amort.lib" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

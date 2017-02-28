@@ -298,14 +298,36 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 			}
 			else
 			{
-				for (i = 0; i < month; i++)
+				loanBalance = principal;
+				for (i = month; i > ZERO; i--)
 				{
-					if (i <)
+					if (i > ONE)
 					{
-
+						tabPayment = getPaymentAmount(i, loanBalance, monthlyRate);
+						interestPaid = loanBalance * monthlyRate;
+						principalPaid = tabPayment - interestPaid;
+						loanBalance -= principalPaid;
 					}
+					else 
+					{
+						interestPaid = loanBalance * monthlyRate;
+						principalPaid = loanBalance;
+						tabPayment = roundToNextCent(principalPaid + interestPaid);
+						loanBalance = 0;
+					}
+						
+					fprintf(outFileHandle, "%-5d ( %8.2lf) ",
+							countMonth, tabPayment);
+					fprintf(outFileHandle, "$ %13.2lf ",
+							principalPaid);
+					fprintf(outFileHandle, "$ %13.2lf ",
+							interestPaid);
+					fprintf(outFileHandle, "$ %12.2lf \n",
+							loanBalance);
+					countMonth++;
 				}
 			}
 		}
+		fclose(outFileHandle);
 	}
 }
