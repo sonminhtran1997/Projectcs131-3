@@ -18,5 +18,8 @@ void cleanBuffer();
 double readApr();
 double readPrincipal();
 double readPayment();
+double roundToNextCent(double number);
+double roundToOneEighth(double number);
+double roundToNearestCent(double number);
 int readMonth();
 #endif #pragma once

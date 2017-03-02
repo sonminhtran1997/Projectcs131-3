@@ -63,6 +63,8 @@ int main(void) {
 	short again = TRUE;
 	double totalPayment = 0.0;
 	double principal = 0.0;
+	double lowBound = 0.0;
+	double upBound = 0.0;
 	int month = 0;
 	double monthlyRate = 0.0;
 	double apr = 0.0;
@@ -102,7 +104,20 @@ int main(void) {
 			apr = readApr();
 			monthlyRate = apr / MONTHPERCENT;
 			principal = readPrincipal();
-			totalPayment = readPayment();
+			lowBound = roundToNearestCent(principal * (apr / MONTHPERCENT));
+			upBound = roundToNearestCent(principal * 
+				(1 + (apr / MONTHPERCENT)));
+			printf("\nThe payment you entered must be greater than"
+				" %.2lf and no bigger than %.2lf", lowBound, upBound);
+			do
+			{
+				totalPayment = readPayment();
+				if ((totalPayment < lowBound) || (totalPayment > upBound))
+				{
+					printf("\nThe payment you entered must be greater than"
+						" %.2lf and no bigger than %.2lf", lowBound, upBound);
+				}
+			} while ((totalPayment < lowBound) || (totalPayment > upBound));
 			month = getNumberOfMonths(principal, totalPayment, monthlyRate);
 			printf("\nNumber of months to pay the loan: %d", month);
 			printTable(principal, totalPayment, monthlyRate, month);

@@ -12,15 +12,13 @@
 #define MANYTIMES 20
 #define YEARLY_INTEREST_RATE 1200
 #pragma once
-double roundToOneEighth(double number);
-double roundToNextCent(double number);
 double getPaymentAmount(int months, double principal, double monthlyRate)
 {
 	double numerator = 0.0;
 	double denominator = 0.0;
 	if (monthlyRate == ZERO)
 	{
-		return principal / months;
+		return roundToNextCent(principal / months);
 	}
 	else
 	{
@@ -36,13 +34,13 @@ double getLoanAmount(int months, double totalPayment, double monthlyRate)
 	double denominator = 0.0;
 	if (monthlyRate == ZERO)
 	{
-		return totalPayment * months;
+		return roundToNearestCent(totalPayment * months);
 	}
 	else
 	{
 		numerator = (pow((ONE + monthlyRate), months) - ONE) * totalPayment;
 		denominator = pow((ONE + monthlyRate), months) * monthlyRate;
-		return numerator / denominator;
+		return roundToNearestCent(numerator / denominator);
 	}
 }
 
@@ -142,7 +140,7 @@ double readPrincipal() {
 			condition = FALSE;
 		}
 	} while (condition == TRUE);
-	return loan;
+	return roundToNearestCent(loan);
 }
 
 int readMonth() {
@@ -263,6 +261,7 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 	}
 	else {
 		outFileHandle = fopen(filename, "w");
+		loanBalance = principal;
 		if (outFileHandle == NULL)
 		{
 			printf("Could not open file %s for output.\n"
@@ -284,7 +283,16 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 				principalPaid = payment;
 				for (i = 0; i < month; i++)
 				{
-					loanBalance = principal - (i+1) * principalPaid;
+					if (i < month -1)
+					{
+						loanBalance -= principalPaid;
+					}
+					else
+					{
+						principalPaid = loanBalance;
+						tabPayment = loanBalance;
+						loanBalance = 0;
+					}
 					fprintf(outFileHandle, "%-5d ( %8.2lf) ",
 						countMonth, tabPayment);
 					fprintf(outFileHandle, "$ %13.2lf ",
@@ -298,7 +306,6 @@ void printTable(double principal, double payment, double monthlyRate, int month)
 			}
 			else
 			{
-				loanBalance = principal;
 				for (i = month; i > ZERO; i--)
 				{
 					if (i > ONE)
